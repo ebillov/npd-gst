@@ -1,2 +1,4 @@
-# npd-gst
-A wordpress WooCommerce extension plugin to implement GST taxes and Order Invoices in PDF sent to customers for Network PD site.
+# wc-gst-pdf
+A wordpress WooCommerce extension plugin to implement GST taxes and Order Invoices in PDF sent to customers.
+
+Requires WooCommerce to activate this plugin.

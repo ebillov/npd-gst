@@ -27,8 +27,8 @@ define('NPD_GST_DIR_URL', preg_replace('/\s+/', '', plugin_dir_url(__FILE__)));
 define('NPD_GST_DIR_PATH', preg_replace('/\s+/', '', plugin_dir_path(__FILE__)));
 
 //Include the main class.
-if ( ! class_exists( 'NPD_GST_Main', false ) ) {
-	include_once NPD_DIR_PATH . '/Classes/GP_Main.php';
+if( !class_exists( 'NPD_GST_Main', false ) ) {
+	include_once NPD_GST_DIR_PATH . 'Classes/NPD_GST_Main.php';
 }
 
 NPD_GST_Main::instance();

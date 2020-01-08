@@ -50,14 +50,14 @@ class NPD_GST_Main {
     public function includes(){
 
         //Helpers
-        include_once NPD_GST_DIR_PATH . 'includes/helpers.php';
+        //include_once NPD_GST_DIR_PATH . 'includes/helpers.php';
 
         //libraries
-        include_once NPD_GST_DIR_PATH . 'lib/phpqrcode/qrlib.php';
+        //include_once NPD_GST_DIR_PATH . 'lib/phpqrcode/qrlib.php';
 
         //Classes
-        include_once NPD_GST_DIR_PATH . 'Classes/QR_Code.php';
-        include_once NPD_GST_DIR_PATH . 'Classes/GP_Admin_Menu.php';
+        //include_once NPD_GST_DIR_PATH . 'Classes/QR_Code.php';
+        include_once NPD_GST_DIR_PATH . 'Classes/NPD_GST_Admin_Menu.php';
 
     }
 

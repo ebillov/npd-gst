@@ -3,10 +3,7 @@
 //Exit if accessed directly.
 defined('ABSPATH') or exit;
 
-class NPD_GST_Admin_Menu {
-
-    //Default option string
-    private $option_prefix = 'npd_gst_';
+class NPD_GST_Admin_Menu extends NPD_GST_Main {
 
     /**
      * Initialize all the hooks
@@ -63,6 +60,12 @@ class NPD_GST_Admin_Menu {
                 'name' => 'enable_gst',
                 'description' => 'Enable to display and include GST rates on the cart, checkout and invoices.'
             ],
+            [
+                'type' => 'text',
+                'label' => 'Event Processing Fee Rate (%)',
+                'name' => 'event_processing_fee_rate',
+                'description' => '(Leave empty to disable) The processing fee rate for events added to the cart. Equation: ((Total cart contents + Shipping fee) * Processing Fee Rate ) + 0.30'
+            ],
             /*
             'checkbox' => [
                 'label' => 'Include QR Code On Invoices',
@@ -94,9 +97,9 @@ class NPD_GST_Admin_Menu {
             ],
             [
                 'type' => 'text',
-                'label' => 'GST Rate',
+                'label' => 'GST Rate (%)',
                 'name' => 'gst_rate',
-                'description' => 'The GST tax rate to be included in the cart, checkout details and order invoices.'
+                'description' => 'The GST tax rate to be included in the cart, checkout details and order invoices. The GST rate is automatically included on each event price.'
             ],
             [
                 'type' => 'submit',
@@ -129,13 +132,12 @@ class NPD_GST_Admin_Menu {
                 case 'text':
                     $content .= '<div class="form_group">';
                     $content .= '<label class="field">' . $field['label'] . '</label>';
-                    $content .= '<input type="text" name="' . $field['name'] . '" value="' . $this->get_value($field['name']) . '"/>
-                        ' . ( (!empty($field['description'])) ? '<br><span class="description checkbox_desc">' . $field['description'] . '</span>' : '' );
+                    $content .= '<input type="text" name="' . $field['name'] . '" value="' . $this->get_value($field['name']) . '"/>';
+                    $content .= ( (!empty($field['description'])) ? '<br><span class="description checkbox_desc">' . $field['description'] . '</span>' : '' );
                     $content .= '</div>';
                     break;
                 case 'checkbox':
                     $content .= '<div class="form_group">';
-                    
                     $content .= '<input type="checkbox" name="' . $field['name'] . '" ' . ( (!empty($this->get_value($field['name']))) ? 'checked' : '' ) . '/>';
                     $content .= '<label>' . $field['label'] . '</label>';
                     $content .= ( (!empty($field['description'])) ? '<br><span class="description checkbox_desc">' . $field['description'] . '</span>' : '' );
@@ -153,25 +155,6 @@ class NPD_GST_Admin_Menu {
 
         return $content;
 
-    }
-
-    /**
-     * Method to get the option data
-     * @param string the name field
-     * @return mixed value that was set
-     */
-    public function get_value(string $name){
-        return get_option($this->option_prefix . $name);
-    }
-
-    /**
-     * Method to set the option data
-     * @param string the name field
-     * @param mixed the value
-     * @return void
-     */
-    public function set_value(string $name, $value){
-        update_option($this->option_prefix . $name, $value);
     }
 
     /**

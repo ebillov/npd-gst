@@ -65,9 +65,11 @@ class NPD_GST_Main {
         //Action Hooks
         include_once NPD_GST_DIR_PATH . 'hooks/actions/woocommerce_cart_calculate_fees.php';
         include_once NPD_GST_DIR_PATH . 'hooks/actions/woocommerce_before_calculate_totals.php';
+        include_once NPD_GST_DIR_PATH . 'hooks/actions/woocommerce_add_order_item_meta.php';
 
         //Filter Hooks
         include_once NPD_GST_DIR_PATH . 'hooks/filters/woocommerce_get_item_data.php';
+        include_once NPD_GST_DIR_PATH . 'hooks/filters/woocommerce_add_cart_item_data.php';
 
     }
 

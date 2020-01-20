@@ -3,6 +3,7 @@
 //Exit if accessed directly.
 defined('ABSPATH') or exit;
 
+//Add some additional fees to cart total
 add_action('woocommerce_cart_calculate_fees', function(){
 
     global $woocommerce;

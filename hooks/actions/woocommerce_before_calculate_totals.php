@@ -3,6 +3,7 @@
 //Exit if accessed directly.
 defined('ABSPATH') or exit;
 
+//Add some fees before cart total
 add_action('woocommerce_before_calculate_totals', function($cart_obj){
 
     if(is_admin() && !defined('DOING_AJAX')){

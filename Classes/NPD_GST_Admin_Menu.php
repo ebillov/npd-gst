@@ -99,7 +99,7 @@ class NPD_GST_Admin_Menu extends NPD_GST_Main {
                 'type' => 'text',
                 'label' => 'GST Rate (%)',
                 'name' => 'gst_rate',
-                'description' => 'The GST tax rate to be included in the cart, checkout details and order invoices. The GST rate is automatically included on each event price.'
+                'description' => 'The GST tax rate to be included in the cart, checkout details and order invoices. The GST rate is automatically included on each product price.'
             ],
             [
                 'type' => 'submit',

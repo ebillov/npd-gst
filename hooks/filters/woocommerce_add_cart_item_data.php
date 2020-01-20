@@ -12,14 +12,18 @@ add_filter('woocommerce_add_cart_item_data', function($cart_item, $product_id, $
     //Get the price
     $price = $variable_product->get_price();
 
+    //Get the GST settings
+    $gst_enabled = $this->get_value('enable_gst');
+    $gst_rate = floatval($this->get_value('gst_rate'));
+
     //Set default value
     $gst_calculated   = '';
 
-    if(!empty($variation_id)){
+    if(!empty($variation_id) && $gst_enabled == 'on' && $gst_rate > 0){
         if(get_post_meta($variation_id, 'gst_value', true) == 1){
-            $gst_calculated = $price - $price / (1 + (floatval($this->get_value('gst_rate')) / 100));
+            $gst_calculated = $price - $price / (1 + ( $gst_rate / 100));
         } elseif(get_post_meta($variation_id, 'gst_exclusive', true)){
-            $gst_calculated = $price * (1 + (floatval($this->get_value('gst_rate')) / 100)) - $price;
+            $gst_calculated = $price * (1 + ( $gst_rate / 100)) - $price;
         }
     }
 

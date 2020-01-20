@@ -4,10 +4,10 @@
 defined('ABSPATH') or exit;
 
 //Add order line to product meta data
-add_action('woocommerce_add_order_item_meta', function(){
+add_action('woocommerce_add_order_item_meta', function($item_id, $values){
 
     //Quick check
-    if(!empty($values['gst_calculated'])){
+    if(!empty($values['gst_calculated']) && $this->get_value('enable_gst') == 'on'){
 
         //Get the GST value
         $gst_calculated  = $values['gst_calculated'] * $values['quantity'];
@@ -24,4 +24,4 @@ add_action('woocommerce_add_order_item_meta', function(){
 
     }
 
-}, 11, 2);
+}, 12, 2);

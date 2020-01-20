@@ -67,6 +67,18 @@ class NPD_GST_Admin_Menu extends NPD_GST_Main {
                 'description' => '(Leave empty to disable) The processing fee rate for events added to the cart. Equation: ((Total cart contents + Shipping fee) * Processing Fee Rate ) + 0.30'
             ],
             /*
+            [
+                'type' => 'checkbox',
+                'label' => 'Send PDF Invoice to Customer',
+                'name' => 'enable_pdf_invoice',
+                'description' => 'Enabling this option will send a PDF Invoice to the customer after checkout.',
+                'dependency' => [
+                    'value' => $this->has_dependency('enable_pdf_invoice'),
+                    'description' => 'The plugin <a href="https://wordpress.org/plugins/woocommerce-pdf-invoices-packing-slips/" target="_blank">WooCommerce PDF Invoices & Packing Slips</a> must be activated to use this option.'
+                ]
+            ],
+            */
+            /*
             'checkbox' => [
                 'label' => 'Include QR Code On Invoices',
                 'name' => 'enable_qr_code',
@@ -130,17 +142,19 @@ class NPD_GST_Admin_Menu extends NPD_GST_Main {
             //Switch between key types
             switch($field['type']){
                 case 'text':
-                    $content .= '<div class="form_group">';
+                    $content .= ($field['dependency']['value']) ? '<div class="form_group has_dependency">' : '<div class="form_group">';
                     $content .= '<label class="field">' . $field['label'] . '</label>';
                     $content .= '<input type="text" name="' . $field['name'] . '" value="' . $this->get_value($field['name']) . '"/>';
-                    $content .= ( (!empty($field['description'])) ? '<br><span class="description checkbox_desc">' . $field['description'] . '</span>' : '' );
+                    $content .= ( (!empty($field['description'])) ? '<br><span class="description normal_desc">' . $field['description'] . '</span>' : '' );
+                    $content .= ($field['dependency']['value']) ? '<span class="description warning_desc">' . $field['dependency']['description'] . '</span>' : '';
                     $content .= '</div>';
                     break;
                 case 'checkbox':
-                    $content .= '<div class="form_group">';
+                    $content .= ($field['dependency']['value']) ? '<div class="form_group has_dependency">' : '<div class="form_group">';
                     $content .= '<input type="checkbox" name="' . $field['name'] . '" ' . ( (!empty($this->get_value($field['name']))) ? 'checked' : '' ) . '/>';
                     $content .= '<label>' . $field['label'] . '</label>';
-                    $content .= ( (!empty($field['description'])) ? '<br><span class="description checkbox_desc">' . $field['description'] . '</span>' : '' );
+                    $content .= ( (!empty($field['description'])) ? '<br><span class="description normal_desc">' . $field['description'] . '</span>' : '' );
+                    $content .= ($field['dependency']['value']) ? '<span class="description warning_desc">' . $field['dependency']['description'] . '</span>' : '';
                     $content .= '</div>';
                     break;
                 case 'submit':

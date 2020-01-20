@@ -24,9 +24,22 @@ defined('ABSPATH') or exit;
         margin-bottom: 10px;
         display: block;
     }
-    span.checkbox_desc {
+    span.normal_desc {
         margin-top: 10px;
         display: block;
+    }
+    span.warning_desc {
+        margin-top: 10px;
+        display: block;
+        background-color: #ffe8e6;
+        border: 1px solid #eac6c3;
+        padding: 10px;
+        border-radius: 3px;
+    }
+    div.has_dependency input,
+    div.has_dependency label {
+        pointer-events: none;
+        opacity: 0.5;
     }
 </style>
 <div class="wrap">

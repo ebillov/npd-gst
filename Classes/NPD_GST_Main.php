@@ -12,7 +12,16 @@ class NPD_GST_Main {
     private $option_prefix = 'npd_gst_';
 
 	//A single instance of the class DC_Main
-	protected static $_instance = null;
+    protected static $_instance = null;
+
+    /**
+     * Define option dependencies
+     * This is where the options are marked with a warning message when a certain dependency plugin is not active
+     * @var array where array key is the form name field and value is the main plugin file path to be checked with is_plugin_active()
+     */
+    public $option_dependencies = [
+        'enable_pdf_invoice' => 'woocommerce-pdf-invoices-packing-slips/woocommerce-pdf-invoices-packingslips.php'
+    ];
 	
 	/**
      * GST_PDF_Main Instance ensuring that only 1 instance of the class is loaded
@@ -70,6 +79,24 @@ class NPD_GST_Main {
         //Filter Hooks
         include_once NPD_GST_DIR_PATH . 'hooks/filters/woocommerce_get_item_data.php';
         include_once NPD_GST_DIR_PATH . 'hooks/filters/woocommerce_add_cart_item_data.php';
+
+    }
+
+    /**
+     * Method to check for dependencies defined in an option form field
+     * @param string the form name field
+     * @return bool
+     */
+    public function has_dependency(string $key){
+
+        //Quick check for the name field
+        if(array_key_exists($key, $this->option_dependencies)){
+            if( !is_plugin_active($this->option_dependencies[$key]) ){
+                return true;
+            }
+        }
+
+        return false;
 
     }
 

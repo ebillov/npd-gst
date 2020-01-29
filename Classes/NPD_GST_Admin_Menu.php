@@ -111,7 +111,9 @@ class NPD_GST_Admin_Menu extends NPD_GST_Main {
                 'type' => 'text',
                 'label' => 'GST Rate (%)',
                 'name' => 'gst_rate',
-                'description' => 'The GST tax rate to be included in the cart, checkout details and order invoices. The GST rate is automatically included on each product price.'
+                'description' => 'The GST tax rate to be included in the cart, checkout details and order invoices. The GST rate is automatically included on each product price.<br>
+                <b>Formula for GST Inclusive:</b> GST = Product price * (% GST / 100)<br>
+                <b>Formula for GST Exclusive:</b> GST = Product price * ( 1 + (%GST / 100)) - Product price'
             ],
             [
                 'type' => 'submit',
